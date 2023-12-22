@@ -1,6 +1,14 @@
 # compiled output
 /dist
 /node_modules
+/M1/dist
+/M1/node_modules
+/M2/dist
+/M2/node_modules
+
+.env
+/M1/.env
+/M2/.env
 
 # Logs
 logs

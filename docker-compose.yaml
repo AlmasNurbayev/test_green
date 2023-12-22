@@ -12,23 +12,18 @@ services:
     volumes: 
       - pgdata:/data/db
       #- ./create.sql:/docker-entrypoint-initdb.d/create_tables.sql 
-  green:
+  M1:
     image: node:20
     command: bash -c "npm install && npm run start:dev"
     working_dir: /app
     volumes:
-      - ./:/app
+      - ./M1/:/app
     ports:
-      - ${PORT_GREEN_SERVICE}:5002
+      - ${PORT_M1_SERVICE}:${PORT_M1_SERVICE}
     environment:
       NODE_ENV: ${NODE_ENV}
-      APP_URL: 'http://${HOST}:${PORT_GREEN_SERVICE}'
-      #WEB_URL: 'http://${HOST}:${PORT_WEB_ADMIN}'
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: ${DB_NAME}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+      APP_URL: 'http://${HOST}:${PORT_M1_SERVICE}'
+      #DATABASE_URL: postgresql://${DB_USERNAME}:${DB_PASSWORD}@db:5432/${DB_NAME}?schema=public
 
 volumes:
     pgdata:

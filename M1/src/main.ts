@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 
@@ -29,7 +29,9 @@ async function bootstrap() {
       skipMissingProperties: true,
     }),
   );
-  console.log(configService.get('port'));
+  Logger.log('app started on port: ' + configService.get('port'));
+
+  console.log(process.env.DATABASE_URL);
 
   await app.listen(configService.get('port'));
 }
