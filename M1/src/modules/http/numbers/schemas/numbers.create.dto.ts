@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class NumbersCreateDto {
   @ApiProperty({ required: true })
-  @IsNumber()
-  number: string;
+  @IsNotEmpty()
+  @IsNumber({ maxDecimalPlaces: 0 })
+  number: number;
 }

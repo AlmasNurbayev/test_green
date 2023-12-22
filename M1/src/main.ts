@@ -30,8 +30,7 @@ async function bootstrap() {
     }),
   );
   Logger.log('app started on port: ' + configService.get('port'));
-
-  console.log(process.env.DATABASE_URL);
+  //console.log(process.env.DATABASE_URL);
 
   await app.listen(configService.get('port'));
 }
