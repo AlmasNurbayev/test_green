@@ -8,13 +8,13 @@ services:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      PGDATA: "/var/lib/postgresql/data/pgdata"
-    volumes: 
+      PGDATA: '/var/lib/postgresql/data/pgdata'
+    volumes:
       - pgdata:/data/db
-      #- ./create.sql:/docker-entrypoint-initdb.d/create_tables.sql 
+      #- ./create.sql:/docker-entrypoint-initdb.d/create_tables.sql
   M1:
     image: node:20
-    command: bash -c "npm install && npm run start:dev"
+    command: bash -c "npm install && npx prisma migrate deploy && npm run start:dev"
     working_dir: /app
     volumes:
       - ./M1/:/app
@@ -23,8 +23,23 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV}
       APP_URL: 'http://${HOST}:${PORT_M1_SERVICE}'
+      RMQ_URL: amqp://${RM_USERNAME}:${RM_PASSWORD}@rabbitmq:5672
       #DATABASE_URL: postgresql://${DB_USERNAME}:${DB_PASSWORD}@db:5432/${DB_NAME}?schema=public
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RM_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RM_PASSWORD}
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log_levels [{connection,error},{default,error}] disk_free_limit 2147483648
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    ports:
+      - ${RM_PORT1}:15672
+
 volumes:
-    pgdata:
-    app:
+  pgdata:
+  app:
+  rabbitmq:

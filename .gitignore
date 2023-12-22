@@ -10,6 +10,8 @@
 /M1/.env
 /M2/.env
 
+/rabbitmq
+
 # Logs
 logs
 *.log

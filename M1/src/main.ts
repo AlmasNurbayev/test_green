@@ -30,7 +30,10 @@ async function bootstrap() {
     }),
   );
   Logger.log('app started on port: ' + configService.get('port'));
-  //console.log(process.env.DATABASE_URL);
+
+  app.connectMicroservice(configService.get('rmq'));
+
+  await app.startAllMicroservices();
 
   await app.listen(configService.get('port'));
 }
