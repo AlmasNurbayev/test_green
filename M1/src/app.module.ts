@@ -3,14 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import app from './config/app';
 import { ConfigModule } from '@nestjs/config';
-import { NumbersModule } from './modules/http/numbers/numbes.module';
+import { NumbersRMQModule } from './modules/numbers/rmq/numbers.rmq.module';
+import { NumbersHTTPModule } from './modules/numbers/http/numbers.http.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [app],
     }),
-    NumbersModule,
+    NumbersHTTPModule,
+    NumbersRMQModule,
   ],
   controllers: [AppController],
   providers: [AppService],

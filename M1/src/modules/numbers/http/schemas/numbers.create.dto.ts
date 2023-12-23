@@ -5,5 +5,5 @@ export class NumbersCreateDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsNumber({ maxDecimalPlaces: 0 })
-  number: number;
+  value: number;
 }

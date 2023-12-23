@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,15 +27,14 @@ async function bootstrap() {
     new ValidationPipe({
       transform: true,
       whitelist: true,
-      skipMissingProperties: true,
+      //skipMissingProperties: true,
     }),
   );
-  Logger.log('app started on port: ' + configService.get('port'));
-
-  app.connectMicroservice(configService.get('rmq'));
-
+  app.use(helmet());
+  app.connectMicroservice(configService.get('rmq_service'));
   await app.startAllMicroservices();
-
   await app.listen(configService.get('port'));
+
+  Logger.log('app started on port: ' + configService.get('port'));
 }
 bootstrap();

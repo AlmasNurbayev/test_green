@@ -11,14 +11,25 @@ export default () => ({
     version: '1.0',
   },
   DATABASE_URL: process.env.DATABASE_URL,
-  rmq: {
-    name: 'numbers_rmq',
+  rmq_service: {
+    name: 'rmq_service',
     transport: Transport.RMQ,
     options: {
       urls: [process.env.RMQ_URL || 'amqp://localhost:5674'],
-      queue: 'numbers_queue',
+      queue: process.env.NUMBERS_FROM_M2 || 'numbers_from_M2',
       queueOptions: {
-        durable: false,
+        durable: true,
+      },
+    },
+  },
+  rmq_client: {
+    name: 'rmq_client',
+    transport: Transport.RMQ,
+    options: {
+      urls: [process.env.RMQ_URL || 'amqp://localhost:5674'],
+      queue: process.env.NUMBERS_FROM_M1 || 'numbers_from_M1',
+      queueOptions: {
+        durable: true,
       },
     },
   },

@@ -12,6 +12,15 @@ datasource db {
 
 model numbers {
   id        Int      @default(autoincrement()) @id
-  number     Int
+  value     Int
   created_at  DateTime   @default(now())
+  received numbers_recieved[]
+}
+
+model numbers_recieved {
+  id        Int      @default(autoincrement()) @id
+  numbers_id Int
+  value     Int
+  created_at  DateTime   @default(now())
+  received numbers @relation(fields: [numbers_id], references: [id])
 }
