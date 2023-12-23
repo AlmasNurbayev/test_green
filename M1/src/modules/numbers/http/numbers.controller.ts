@@ -1,4 +1,11 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
 import { NumbersService } from './numbers.service';
 import { NumbersCreateDto } from './schemas/numbers.create.dto';
@@ -17,11 +24,11 @@ export class NumbersController {
     return this.numbersService.create(data);
   }
 
-  @Get()
+  @Get(':id')
   @ApiOperation({
-    description: 'get numbers from database',
+    description: 'get output data by input id',
   })
-  async find() {
-    return this.numbersService.find();
+  async getResult(@Param('id', ParseIntPipe) id: number) {
+    return this.numbersService.getResult(id);
   }
 }

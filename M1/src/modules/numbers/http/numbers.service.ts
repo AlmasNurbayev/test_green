@@ -30,7 +30,9 @@ export class NumbersService {
     return newNumber;
   }
 
-  async find() {
-    return this.prisma.numbers.findMany();
+  async getResult(id: number) {
+    return this.prisma.numbers_recieved.findFirst({
+      where: { numbers_id: id },
+    });
   }
 }

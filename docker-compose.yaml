@@ -55,6 +55,7 @@ services:
       - ./rabbitmq:/var/lib/rabbitmq
     ports:
       - ${RM_PORT1}:15672
+      - ${RM_PORT2}:5672
 
 volumes:
   pgdata:
