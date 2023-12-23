@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "0e0987f5-fb90-44c8-8e1c-7eff5d44267f",
+		"name": "test_green",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25167682"
+	},
+	"item": [
+		{
+			"name": "numbers localhost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:7001/numbers/7",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"numbers",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "numbers localhost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 220\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:7001/numbers",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "numbers VPS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "45.146.167.130:7001/numbers/1",
+					"host": [
+						"45",
+						"146",
+						"167",
+						"130"
+					],
+					"port": "7001",
+					"path": [
+						"numbers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "numbers VPS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 180\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "45.146.167.130:7001/numbers",
+					"host": [
+						"45",
+						"146",
+						"167",
+						"130"
+					],
+					"port": "7001",
+					"path": [
+						"numbers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
