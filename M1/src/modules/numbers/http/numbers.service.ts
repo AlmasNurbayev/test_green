@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { NumbersCreateDto } from './schemas/numbers.create.dto';
 import { PrismaService } from 'src/providers/prisma/prisma.service';
 import { ClientProxy } from '@nestjs/microservices';
@@ -31,8 +31,18 @@ export class NumbersService {
   }
 
   async getResult(id: number) {
-    return this.prisma.numbers_recieved.findFirst({
+    const res = this.prisma.numbers_recieved.findFirst({
       where: { numbers_id: id },
     });
+    if (!res) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          message: 'Объект не найден, повторите позже',
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return res;
   }
 }
