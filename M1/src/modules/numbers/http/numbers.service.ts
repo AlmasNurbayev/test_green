@@ -34,7 +34,7 @@ export class NumbersService {
     const res = this.prisma.numbers_recieved.findFirst({
       where: { numbers_id: id },
     });
-    if (!res) {
+    if (res === null) {
       throw new HttpException(
         {
           status: HttpStatus.NOT_FOUND,
