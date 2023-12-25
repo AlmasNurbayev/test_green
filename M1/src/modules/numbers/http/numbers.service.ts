@@ -31,11 +31,10 @@ export class NumbersService {
   }
 
   async getResult(id: number) {
-    const res = this.prisma.numbers_recieved.findFirst({
+    const res = await this.prisma.numbers_recieved.findFirst({
       where: { numbers_id: id },
     });
-    console.log(res);
-    if (res === null) {
+    if (!res) {
       throw new HttpException(
         {
           status: HttpStatus.NOT_FOUND,
