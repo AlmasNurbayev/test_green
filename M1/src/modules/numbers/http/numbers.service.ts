@@ -34,6 +34,7 @@ export class NumbersService {
     const res = this.prisma.numbers_recieved.findFirst({
       where: { numbers_id: id },
     });
+    console.log(res);
     if (res === null) {
       throw new HttpException(
         {
